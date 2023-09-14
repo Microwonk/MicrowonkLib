@@ -1,7 +1,6 @@
 package net.microwonk.pubsub;
 
 import net.microwonk.pubsub.pub.ListeningPublisher;
-import net.microwonk.pubsub.pub.Publisher;
 import net.microwonk.pubsub.sub.Subscriber;
 
 import java.util.Scanner;
@@ -18,10 +17,12 @@ public class Test {
         pub.subscribe(sub2.subToStr);
 
         Scanner s = new Scanner(System.in);
-        for (int i = 0; i < 10; i++) {
-            pub.listenToThis = s.nextInt();
-            pub.listenToThis2 = s.nextInt();
-        }
+
+        pub.listenToThis = s.nextInt();
+        pub.listenToThis2 = s.nextInt();
+
+        // pub.cleanUpListeners();
+        s.close();
     }
 
     public static class TestSubscriber implements Subscriber<Integer> {
@@ -32,14 +33,14 @@ public class Test {
     }
 
     public static class TestInlineSubscriber {
-        protected final Subscriber<Integer> subToInt = new Subscriber<Integer>() {
+        protected final Subscriber<Integer> subToInt = new Subscriber<>() {
             @Override
             public void receiveMessage(Integer message) {
                 System.out.println(this.hashCode() + " " + message);
             }
         };
 
-        protected final Subscriber<String> subToStr = new Subscriber<String>() {
+        protected final Subscriber<String> subToStr = new Subscriber<>() {
             @Override
             public void receiveMessage(String message) {
                 System.out.println(this.hashCode() + " " + message);
@@ -51,7 +52,7 @@ public class Test {
         public int listenToThis = 1;
         public int listenToThis2 = 2;
         TestPublisher() {
-            addFields(this, "listenToThis", "listenToThis2");
+            addTargets(this, "listenToThis", "listenToThis2");
         }
 
 

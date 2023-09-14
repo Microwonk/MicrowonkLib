@@ -33,10 +33,13 @@ public class Publisher {
         });
     }
 
-    private <T> void deliverMessage(Subscriber<?> sub, Object message) {
+    private void deliverMessage(Subscriber<?> sub, Object message) {
         try {
-            Method toInvoke = Arrays.stream(sub.getClass().getDeclaredMethods())
-                    .filter(m -> m.getName().equals("receiveMessage")).findFirst().orElseThrow(IllegalStateException::new);
+            Method toInvoke = Arrays
+                    .stream(sub.getClass().getDeclaredMethods())
+                    .filter(m -> m.getName().equals("receiveMessage"))
+                    .findFirst()
+                    .orElseThrow(IllegalStateException::new);
             toInvoke.setAccessible(true);
             toInvoke.invoke(sub, message);
         } catch (Exception ignored) {
@@ -56,7 +59,7 @@ public class Publisher {
         });
     }
 
-    public synchronized int count() {
+    public synchronized int size() {
         return subscribers.size();
     }
 }
