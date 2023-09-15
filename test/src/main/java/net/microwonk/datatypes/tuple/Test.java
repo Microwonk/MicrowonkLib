@@ -1,4 +1,4 @@
-package net.microwonk.datatypes.tuples;
+package net.microwonk.datatypes.tuple;
 
 public class Test {
     public static void main(String[] args) {

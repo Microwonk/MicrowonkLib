@@ -1,8 +1,9 @@
-package net.microwonk.datatypes.tuples;
+package net.microwonk.datatypes.tuple;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.RandomAccess;
 
 // TODO documentation
@@ -16,6 +17,7 @@ public class Tuple implements TupleDataType, Cloneable, RandomAccess, Serializab
     private final int size;
 
     public Tuple(Object ...values) {
+        if (Arrays.stream(values).anyMatch(Objects::isNull)) throw new NullPointerException("Non-Sizeable Tuple cannot be created with null values");
         this.values = values;
         size = values.length;
     }
@@ -41,7 +43,6 @@ public class Tuple implements TupleDataType, Cloneable, RandomAccess, Serializab
         return true;
     }
 
-    @Override
     public int size() {
         return size;
     }

@@ -1,6 +1,7 @@
 package net.microwonk.pubsub;
 
 import net.microwonk.pubsub.pub.ListeningPublisher;
+import net.microwonk.pubsub.pub.Publisher;
 import net.microwonk.pubsub.sub.Subscriber;
 
 import java.util.Scanner;
@@ -20,6 +21,10 @@ public class Test {
 
         pub.listenToThis = s.nextInt();
         pub.listenToThis2 = s.nextInt();
+
+        pub.removeListener("listenToThis");
+
+        pub.listenToThis = s.nextInt();
 
         // pub.cleanUpListeners();
         s.close();
@@ -56,5 +61,22 @@ public class Test {
         }
 
 
+    }
+
+    public class Channel extends Publisher {
+        private String channelName;
+        private int channelID;
+        // Event
+        public void setChannel(String channel) {
+            this.channelName = channel;
+            this.channelID = channel.chars().sum(); // id for channelName
+            super.publish(channel);
+        }
+        public static class SubscriberExample implements Subscriber<String> {
+            @Override
+            public void receiveMessage(String message) {
+                System.out.println(this.hashCode() + " " + message);
+            }
+        }
     }
 }

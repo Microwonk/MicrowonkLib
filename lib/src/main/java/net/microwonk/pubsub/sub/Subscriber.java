@@ -1,13 +1,5 @@
 package net.microwonk.pubsub.sub;
 
-import java.lang.reflect.Method;
-import java.util.Objects;
-
-/**
- * @author Nicolas Frey
- * @version 1.0.2
- * @requires Class 'net.microwonk.pubsub.pub.Publisher'
- */
 @FunctionalInterface
 public interface Subscriber<T> {
     /**

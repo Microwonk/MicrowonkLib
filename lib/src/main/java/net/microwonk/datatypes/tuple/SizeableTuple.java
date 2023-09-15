@@ -1,4 +1,4 @@
-package net.microwonk.datatypes.tuples;
+package net.microwonk.datatypes.tuple;
 
 // TODO
 public class SizeableTuple implements TupleDataType {
@@ -12,10 +12,6 @@ public class SizeableTuple implements TupleDataType {
         return null;
     }
 
-    @Override
-    public int size() {
-        return 0;
-    }
 
     @Override
     public Object[] toArray() {
