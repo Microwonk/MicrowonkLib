@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 
-// TODO documentation and removing Tuple
+// TODO documentation
 public class ListeningPublisher extends Publisher {
 
     private final ConcurrentHashMap<Object, Set<String>> listenTargets = new ConcurrentHashMap<>();

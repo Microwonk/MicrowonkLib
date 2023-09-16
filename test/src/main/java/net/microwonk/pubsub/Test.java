@@ -26,7 +26,7 @@ public class Test {
 
         pub.listenToThis = s.nextInt();
 
-        // pub.cleanUpListeners();
+        pub.cleanUpListeners();
         s.close();
     }
 
@@ -61,22 +61,5 @@ public class Test {
         }
 
 
-    }
-
-    public class Channel extends Publisher {
-        private String channelName;
-        private int channelID;
-        // Event
-        public void setChannel(String channel) {
-            this.channelName = channel;
-            this.channelID = channel.chars().sum(); // id for channelName
-            super.publish(channel);
-        }
-        public static class SubscriberExample implements Subscriber<String> {
-            @Override
-            public void receiveMessage(String message) {
-                System.out.println(this.hashCode() + " " + message);
-            }
-        }
     }
 }
